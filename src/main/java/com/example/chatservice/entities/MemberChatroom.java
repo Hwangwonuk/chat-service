@@ -1,7 +1,12 @@
 package com.example.chatservice.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
+@NoArgsConstructor
 @Entity
 public class MemberChatroom {
 
@@ -16,5 +21,10 @@ public class MemberChatroom {
     @JoinColumn(name = "chatroom_id")
     @ManyToOne
     private Chatroom chatroom;
-    
+
+    @Builder
+    public MemberChatroom(Member member, Chatroom chatroom) {
+        this.member = member;
+        this.chatroom = chatroom;
+    }
 }
