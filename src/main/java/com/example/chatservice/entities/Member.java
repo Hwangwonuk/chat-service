@@ -2,12 +2,13 @@ package com.example.chatservice.entities;
 
 import com.example.chatservice.enums.Gender;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
+@Getter
 @NoArgsConstructor
 @Entity
 public class Member {

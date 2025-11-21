@@ -3,6 +3,7 @@ package com.example.chatservice.services;
 import com.example.chatservice.entities.Member;
 import com.example.chatservice.enums.Gender;
 import com.example.chatservice.repositories.MemberRepository;
+import com.example.chatservice.vos.CustomOAuth2User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -28,10 +29,10 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         Map<String, Object> attributeMap = oAuth2User.getAttribute("kakao_account");
         String email = (String) attributeMap.get("email");
 
-        memberRepository.findByEmail(email)
+        Member member = memberRepository.findByEmail(email)
                 .orElseGet(() -> registerMember(attributeMap));
 
-        return oAuth2User;
+        return new CustomOAuth2User(member, oAuth2User.getAttributes());
     }
 
     private Member registerMember(Map<String, Object> attributeMap) {
