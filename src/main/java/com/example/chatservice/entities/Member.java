@@ -22,7 +22,7 @@ public class Member {
 
     LocalDate birthDay;
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     Gender gender;
 
     String role;
