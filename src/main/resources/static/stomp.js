@@ -19,7 +19,7 @@ stompClient.onStompError = (frame) => {
 function setConnected(connected) {
   $("#connect").prop("disabled", connected);
   $("#disconnect").prop("disabled", !connected);
-  $("#create").prop("disabled", connected);
+  $("#create").prop("disabled", !connected);
 }
 
 function connect() {
