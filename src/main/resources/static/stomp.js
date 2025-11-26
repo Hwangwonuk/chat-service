@@ -56,7 +56,7 @@ function createChatroom() {
     success: function (data) {
       console.log('data: ', data);
       showChatrooms();
-      enterChatrooms(data.id, true);
+      enterChatroom(data.id, true);
     },
     error: function (request, status, error) {
       console.log('request: ', request);
