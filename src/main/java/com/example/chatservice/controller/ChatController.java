@@ -1,4 +1,4 @@
-package com.example.chatservice.configs;
+package com.example.chatservice.controller;
 
 import com.example.chatservice.entities.Chatroom;
 import com.example.chatservice.services.ChatService;
