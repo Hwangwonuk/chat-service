@@ -135,7 +135,7 @@ function joinChatroom(chatroomId) {
 }
 
 function leaveChatroom() {
-  let chatroomId = $("chatroom-id").val();
+  let chatroomId = $("#chatroom-id").val();
   $.ajax({
     type: 'DELETE',
     dataType: 'json',
