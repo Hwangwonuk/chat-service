@@ -36,7 +36,7 @@ function disconnect() {
 function sendMessage() {
   let chatroomId = $("#chatroom-id").val();
   stompClient.publish({
-    destination: "/pub/chats" + chatroomId,
+    destination: "/pub/chats/" + chatroomId,
     body: JSON.stringify(
         {'message': $("#message").val()})
   });

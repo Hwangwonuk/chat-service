@@ -26,7 +26,7 @@ public class StompChatController {
      * @SendTo 에서 지정된 경로의 구독자들에게 메세지를 전달
      */
     @MessageMapping("/chats/{chatroomId}")
-    @SendTo("/sub/chats")
+    @SendTo("/sub/chats/{chatroomId}")
     public ChatMessage handleMessage(@AuthenticationPrincipal Principal principal, @DestinationVariable Long chatroomId, @Payload Map<String, String> payload) {
         log.info("{} sent {} in {}", principal.getName(), payload, chatroomId);
 
