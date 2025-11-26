@@ -8,6 +8,7 @@ import com.example.chatservice.repositories.MemberChatroomRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -55,6 +56,7 @@ public class ChatService {
         return true;
     }
 
+    @Transactional
     public Boolean leaveChatroom(Member member, Long chatroomId) {
         if (!memberChatroomRepository.existsByMemberIdAndChatroomId(member.getId(), chatroomId)) {
             log.info("참여하지 않은 방입니다.");
