@@ -72,7 +72,7 @@ function showChatrooms() {
     url: '/chats',
     success: function (data) {
       console.log('data: ', data);
-      console.log('error')
+      renderChatrooms(data);
     },
     error: function (request, status, error) {
       console.log('request: ', request);
@@ -118,7 +118,7 @@ function enterChatroom(chatroomId, newMember) {
 }
 
 function joinChatroom(chatroomId) {
-  $.axax({
+  $.ajax({
     type: 'POST',
     dataType: 'json',
     url: '/chats/' + chatroomId,
@@ -135,7 +135,7 @@ function joinChatroom(chatroomId) {
 
 function leaveChatroom() {
   let chatroomId = $("chatroom-id").val();
-  $.axax({
+  $.ajax({
     type: 'DELETE',
     dataType: 'json',
     url: '/chats/' + chatroomId,
