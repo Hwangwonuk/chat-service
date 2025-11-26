@@ -97,6 +97,7 @@ let subscription;
 
 function enterChatroom(chatroomId, newMember) {
   $("#chatroom-id").val(chatroomId);
+  $("#messages").html("");
   $("#conversation").show();
   $("#send").prop("disabled", false);
   $("#leave").prop("disabled", false);
