@@ -4,6 +4,7 @@ const stompClient = new StompJs.Client({
 
 stompClient.onConnect = (frame) => {
   setConnected(true);
+  showChatrooms();
   console.log('Connected: ' + frame);
 };
 
