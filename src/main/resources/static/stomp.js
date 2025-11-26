@@ -106,7 +106,7 @@ function enterChatroom(chatroomId, newMember) {
     subscription.unsubscribe();
   }
 
-  subscription = stompClient.subscribe('/sub/chats' + chatroomId, (chatMessage) => {
+  subscription = stompClient.subscribe('/sub/chats/' + chatroomId, (chatMessage) => {
     showMessage(JSON.parse(chatMessage.body));
   });
 
