@@ -29,10 +29,7 @@ public class ChatService {
         chatroom = chatroomRepository.save(chatroom);
 
         // 채팅방을 만든 사용자가 기본적으로 참여되도록 설정
-        MemberChatroom memberChatroom = MemberChatroom.builder()
-                .member(member)
-                .chatroom(chatroom)
-                .build();
+        MemberChatroom memberChatroom = chatroom.addMember(member);
 
         memberChatroomRepository.save(memberChatroom);
 
