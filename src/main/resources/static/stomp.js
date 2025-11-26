@@ -98,6 +98,7 @@ let subscription;
 function enterChatroom(chatroomId, newMember) {
   $("#chatroom-id").val(chatroomId);
   $("#messages").html("");
+  showMessages(chatroomId);
   $("#conversation").show();
   $("#send").prop("disabled", false);
   $("#leave").prop("disabled", false);
@@ -117,6 +118,24 @@ function enterChatroom(chatroomId, newMember) {
           {'message': "님이 방에 들어왔습니다."})
     })
   }
+}
+
+function showMessages(chatroomId) {
+  $.ajax({
+    type: 'GET',
+    dataType: 'json',
+    url: '/chats/' + chatroomId + '/messages',
+    success: function (data) {
+      console.log('data', data);
+      for (let i = 0; data.length; i++) {
+        showMessage(data[i]);
+      }
+    },
+    error: function (request, status, error) {
+      console.log('request: ', request);
+      console.log('error: ', error);
+    },
+  })
 }
 
 function joinChatroom(chatroomId) {

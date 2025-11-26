@@ -1,7 +1,9 @@
 package com.example.chatservice.controller;
 
+import com.example.chatservice.dtos.ChatMessage;
 import com.example.chatservice.dtos.ChatroomDto;
 import com.example.chatservice.entities.Chatroom;
+import com.example.chatservice.entities.Message;
 import com.example.chatservice.services.ChatService;
 import com.example.chatservice.vos.CustomOAuth2User;
 import lombok.RequiredArgsConstructor;
@@ -43,5 +45,12 @@ public class ChatController {
                 .toList();
     }
 
+    @GetMapping("/{chatroomId}/messages")
+    public List<ChatMessage> getMessageList(@PathVariable Long chatroomId) {
+        List<Message> messageList = chatService.getMessageList(chatroomId);
+        return messageList.stream()
+                .map(message -> new ChatMessage(message.getMember().getNickName(), message.getText()))
+                .toList();
+    }
 
 }

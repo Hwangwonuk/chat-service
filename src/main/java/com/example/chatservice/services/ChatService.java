@@ -3,8 +3,10 @@ package com.example.chatservice.services;
 import com.example.chatservice.entities.Chatroom;
 import com.example.chatservice.entities.Member;
 import com.example.chatservice.entities.MemberChatroom;
+import com.example.chatservice.entities.Message;
 import com.example.chatservice.repositories.ChatroomRepository;
 import com.example.chatservice.repositories.MemberChatroomRepository;
+import com.example.chatservice.repositories.MessageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -20,6 +22,7 @@ public class ChatService {
 
     private final ChatroomRepository chatroomRepository;
     private final MemberChatroomRepository memberChatroomRepository;
+    private final MessageRepository messageRepository;
 
     public Chatroom createChatroom(Member member, String title) {
         Chatroom chatroom = Chatroom.builder()
@@ -74,6 +77,23 @@ public class ChatService {
         return memberChatroomList.stream()
                 .map(MemberChatroom::getChatroom)
                 .toList();
+    }
+
+    public Message saveMessage(Member member, Long chatroomId, String text) {
+
+        Chatroom chatroom = chatroomRepository.findById(chatroomId).get();
+
+        Message message = Message.builder()
+                .member(member)
+                .chatroom(chatroom)
+                .text(text)
+                .build();
+
+        return messageRepository.save(message);
+    }
+
+    public List<Message> getMessageList(Long chatroomId) {
+        return messageRepository.findAllByChatroomId(chatroomId);
     }
 
 }
