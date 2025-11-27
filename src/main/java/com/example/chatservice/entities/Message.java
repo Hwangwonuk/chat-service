@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 @Getter
 @NoArgsConstructor
 @Entity
@@ -16,6 +18,8 @@ public class Message {
 
     private String text;
 
+    LocalDateTime createdAt;
+
     @JoinColumn(name = "member_id")
     @ManyToOne
     private Member member;
@@ -25,9 +29,10 @@ public class Message {
     private Chatroom chatroom;
 
     @Builder
-    public Message(String text, Member member, Chatroom chatroom) {
+    public Message(String text, Member member, Chatroom chatroom, LocalDateTime createdAt) {
         this.text = text;
         this.member = member;
         this.chatroom = chatroom;
+        this.createdAt = createdAt;
     }
 }

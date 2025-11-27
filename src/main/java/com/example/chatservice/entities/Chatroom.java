@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -25,6 +26,13 @@ public class Chatroom {
     @OneToMany(mappedBy = "chatroom")
     private Set<MemberChatroom> memberSet = new HashSet<>();
 
+    /*
+    단순 확인용 필드, DB 저장 X, 영속성 객체 ㅌ
+     */
+    @Setter
+    @Transient
+    Boolean hasNewMessage;
+
     @Builder
     public Chatroom(String title, LocalDateTime createdAt) {
         this.title = title;
@@ -41,4 +49,5 @@ public class Chatroom {
 
         return memberChatroom;
     }
+
 }
