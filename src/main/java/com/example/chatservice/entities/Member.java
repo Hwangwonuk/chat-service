@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 
@@ -23,6 +24,8 @@ public class Member {
 
     String name;
 
+    String password;
+
     String phoneNumber;
 
     LocalDate birthDay;
@@ -33,14 +36,22 @@ public class Member {
     String role;
 
     @Builder
-    public Member(String email, String nickName, String name, String phoneNumber, LocalDate birthDay, Gender gender, String role) {
+    public Member(String email, String nickName, String name, String password, String phoneNumber, LocalDate birthDay, Gender gender, String role) {
         this.email = email;
         this.nickName = nickName;
         this.name = name;
+        this.password = password;
         this.phoneNumber = phoneNumber;
         this.birthDay = birthDay;
         this.gender = gender;
         this.role = role;
     }
 
+    public void updatePassword(String password, String confirmPassword, PasswordEncoder passwordEncoder) {
+        if (!password.equals(confirmPassword)) {
+            throw new IllegalStateException("패스워드가 일치하지 않습니다.");
+        }
+
+        this.password = passwordEncoder.encode(password);
+    }
 }
