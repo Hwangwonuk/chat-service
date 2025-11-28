@@ -41,6 +41,13 @@ spring:
             authorization-grant-type: authorization_code
             client-authentication-method: client_secret_post
 
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${KAKAO_CLIENT_SECRET}
+            scope:
+              - email
+              - profile
+
         provider:
           kakao:
             authorization-uri: ${KAKAO_AUTH_URI}
